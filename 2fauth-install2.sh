@@ -53,8 +53,7 @@ cd "/opt/2fauth" || return
 cp .env.example .env
 IPADDRESS=$(hostname -I | awk '{print $1}')
 
-sed -i #-e "s|^APP_URL=.*|APP_URL=http://$IPADDRESS|" \
-       -e "s|^DB_CONNECTION=$|DB_CONNECTION=mysql|" \
+sed -i -e "s|^DB_CONNECTION=$|DB_CONNECTION=mysql|" \
        -e "s|^DB_DATABASE=$|DB_DATABASE=$DB_NAME|" \
        -e "s|^DB_HOST=$|DB_HOST=127.0.0.1|" \
        -e "s|^DB_PORT=$|DB_PORT=3306|" \
