@@ -60,6 +60,14 @@ sed -i -e "s|^DB_CONNECTION=$|DB_CONNECTION=mysql|" \
        -e "s|^DB_USERNAME=$|DB_USERNAME=$DB_USER|" \
        -e "s|^DB_PASSWORD=$|DB_PASSWORD=$DB_PASS|" .env
 
+sed -i -e "s|^APP_URL=.*|APP_URL=http://localhost|" \
+       -e "s|^DB_CONNECTION=$|DB_CONNECTION=mysql|" \
+       -e "s|^DB_DATABASE=$|DB_DATABASE=$DB_NAME|" \
+       -e "s|^DB_HOST=$|DB_HOST=127.0.0.1|" \
+       -e "s|^DB_PORT=$|DB_PORT=3306|" \
+       -e "s|^DB_USERNAME=$|DB_USERNAME=$DB_USER|" \
+       -e "s|^DB_PASSWORD=$|DB_PASSWORD=$DB_PASS|" .env
+
 export COMPOSER_ALLOW_SUPERUSER=1
 $STD composer update --no-plugins --no-scripts
 $STD composer install --no-dev --prefer-source --no-plugins --no-scripts
