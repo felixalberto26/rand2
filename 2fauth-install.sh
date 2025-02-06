@@ -78,6 +78,9 @@ chmod -R 755 /opt/2fauth
 echo "${RELEASE}" >"/opt/2fauth_version.txt"
 msg_ok "Setup 2fauth"
 
+#PHP version for NGINX config
+phpver=$(php -v | grep 'cli' | cut -d' ' -f2 | cut -b1-3)
+
 # Configure Service (NGINX)
 msg_info "Configure Service"
 cat <<EOF >/etc/nginx/conf.d/2fauth.conf
@@ -98,7 +101,7 @@ server {
         error_page 404 /index.php;
 
         location ~ \.php\$ {
-                fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php$phpver-fpm.sock;
                 fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
                 include fastcgi_params;
         }
