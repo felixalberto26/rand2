@@ -94,7 +94,7 @@ cat <<EOF >/etc/nginx/conf.d/2fauth.conf
 server {
         listen 80;
         root /opt/2fauth/public;
-        server_name 2fAuth;
+        server_name localhost;
         index index.php;
         charset utf-8;
 
