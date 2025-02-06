@@ -53,7 +53,7 @@ cd "/opt/2fauth" || return
 cp .env.example .env
 IPADDRESS=$(hostname -I | awk '{print $1}')
 
-sed -i -e "s|^APP_URL=.*|APP_URL=127.0.0.1|" \
+sed -i -e "s|^APP_URL=.*|APP_URL=http://127.0.0.1:8001|" \
        -e "s|^DB_CONNECTION=$|DB_CONNECTION=mysql|" \
        -e "s|^DB_DATABASE=$|DB_DATABASE=$DB_NAME|" \
        -e "s|^DB_HOST=$|DB_HOST=127.0.0.1|" \
@@ -87,7 +87,7 @@ cat <<EOF >/etc/nginx/conf.d/2fauth.conf
 server {
         listen 80;
         root /opt/2fauth/public;
-        server_name 2fauth;
+        server_name 127.0.0.1;
         index index.php;
         charset utf-8;
 
