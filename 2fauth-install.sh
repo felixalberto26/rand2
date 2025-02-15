@@ -53,6 +53,8 @@ cd "/opt/2fauth" || return
 cp .env.example .env
 IPADDRESS=$(hostname -I | awk '{print $1}')
 
+asterisk  = "*"
+
 sed -i -e "s|^APP_URL=.*|APP_URL=http://$IPADDRESS|" \
        -e "s|^DB_CONNECTION=$|DB_CONNECTION=mysql|" \
        -e "s|^DB_DATABASE=$|DB_DATABASE=$DB_NAME|" \
@@ -60,7 +62,7 @@ sed -i -e "s|^APP_URL=.*|APP_URL=http://$IPADDRESS|" \
        -e "s|^DB_PORT=$|DB_PORT=3306|" \
        -e "s|^DB_USERNAME=$|DB_USERNAME=$DB_USER|" \
        -e "s|^DB_PASSWORD=$|DB_PASSWORD=$DB_PASS|" 
-       -e "s|^TRUSTED_PROXIES=null$|TRUSTED_PROXIES=*|" .env
+       -e "s|^TRUSTED_PROXIES=null$|TRUSTED_PROXIES=$asterisk|" .env
 
 export COMPOSER_ALLOW_SUPERUSER=1
 $STD composer update --no-plugins --no-scripts
